@@ -1,0 +1,367 @@
+##Sending posts as a User A from Instagram Platform 
+import time
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+import pyautogui
+
+
+#Open Instagram Page
+driver = webdriver.Chrome()
+driver.get ('https://instagram.com/accounts/login/')
+driver.set_window_size(700, 830)
+driver.set_window_position(750, 10)
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[3]')))
+
+if element.is_displayed()== True:
+    print ('Página está disponível para efetuar login')
+
+else:
+    print('Página do Instagram não pode ser aberta')
+
+#user login
+pyautogui.moveTo(997, 281, duration=0.25)
+pyautogui.doubleclick(997, 281);
+pyautogui.typewrite('xxxxxxxxxx'); #username
+pyautogui.moveTo(997, 320, duration=0.25)
+pyautogui.doubleclick(997,324);
+pyautogui.typewrite('xxxxxxxxx); #password
+pyautogui.press('enter');
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[1]/a/div/div[2]/span')))
+
+pyautogui.moveTo(1104, 650, duration=0.25)
+pyautogui.doubleclick(1104, 650);
+
+if element.is_displayed()== True:
+    	
+    	#change browser for mobile version
+   	pyautogui.hotkey('option','command','c')
+	pyautogui.moveTo(942, 157, duration=0.25)
+    	pyautogui.click(942, 157);
+    	pyautogui.moveTo(834, 82, duration=0.25)
+    	pyautogui.click(834, 82);    
+	pyautogui.moveTo(1434, 161, duration=0.25)
+    	pyautogui.click(1434,161);
+    	pyautogui.moveTo(1092, 644, duration=0.25)
+    	pyautogui.click(1092,644);
+    	pyautogui.click(1092,644);
+
+else:
+    print('Page Error to change browser for mobile version')
+#Preparing to load a image
+
+random.seed(10)
+postsEnviados = []
+horaEnviados = []
+for i in range(50):
+    
+    #to post
+    pyautogui.moveTo(1093, 823, duration=0.25)
+    pyautogui.click(1093, 823);
+    pyautogui.moveTo(901, 233, duration=0.25)
+    pyautogui.click(901, 233);
+    pyautogui.moveTo(1383,548, duration=0.25)
+    pyautogui.click(1383,548);
+    
+
+    #wait page load
+    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')))
+
+    if element.is_displayed()== True:
+        #go to next step
+        pyautogui.moveTo(1380,170, duration=0.25)
+        pyautogui.click(1380,170);
+        
+	#wait page load
+        element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')))
+
+        if element.is_displayed()== True:
+            
+            pyautogui.moveTo(854, 235, duration=0.25)
+            pyautogui.click(854, 235);
+            pyautogui.typewrite('#beautiful #cute #instagood #tbt #love #brasil seed10_ - ID: '+str(i));
+            postsEnviados.append(i)
+            
+	    #to press the button “share”
+            pyautogui.moveTo(1380,170, duration=0.25)
+            pyautogui.click(1380,170);
+            
+	    #wait page load
+            element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav[1]/div/div/header/div/h1/a/span')))
+
+            hora_atuais = datetime.now()
+            fuso_horario = timezone('America/Sao_Paulo')
+            hora_sp = hora_atuais.astimezone(fuso_horario)
+            #data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+            data_e_hora_sao_paulo_em_texto = hora_sp.strftime('%H:%M:%S,%f')[:-3]
+            horaEnviados.append(data_e_hora_sao_paulo_em_texto   
+            df_data = {'Descricao do Post': postsEnviados, 'Hora Post': horaEnviados}
+            df=pd.DataFrame (df_data)
+            writer = pd.ExcelWriter('Envio_Instagram_Generica_seed10_.xlsx', engine='xlsxwriter')
+            df.to_excel(writer, sheet_name='seed10_')
+
+            writer.save()
+    intervalo =random.expovariate(0.34)
+    sleep(intervalo) 
+
+##Capturing posts at User B Instagram timeline 
+
+
+#open Instagram page
+driver = webdriver.Chrome()
+driver.get ('https://instagram.com/accounts/login/')
+driver.set_window_size(700, 830)
+driver.set_window_position(750, 10)
+
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[3]')))
+
+if element.is_displayed()== True:
+    print ('Página está disponível para efetuar login')
+
+else:
+    print('Página do Instagram não pode ser aberta')
+    
+#User Login
+pyautogui.moveTo(997, 281, duration=0.25)
+pyautogui.click(997, 281);
+pyautogui.typewrite('xxxxxxx');
+pyautogui.moveTo(997, 324, duration=0.25);
+pyautogui.click(997,324);
+pyautogui.typewrite('xxxxxxx');
+pyautogui.press('enter');
+
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[1]/a/div/div[2]/span')))
+
+pyautogui.moveTo(1104, 650, duration=0.25)
+pyautogui.click(1104, 650);
+
+meusPosts=[]
+horaPost=[]
+elementName = driver.find_elements_by_xpath('//*[@id="react-root"]/section/main/section/div/div[1]/div/article[1]/div[2]/div[1]/ul/li/div/div/div/span/span');
+elementName1 = driver.find_elements_by_xpath('//*[@id="react-root"]/section/main/section/div/div[1]/div/article[2]/div[2]/div[1]/ul/li/div/div/div/span/span');
+
+for item in elementName:
+    ultimo = item.text
+meusPosts.append(ultimo)
+
+data_e_hora_atuais = datetime.now()
+fuso_horario = timezone('America/Sao_Paulo')
+data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+for e in elementName1:
+    pultimo = e.text
+meusPosts.append(pultimo)
+
+data_e_hora_atuais = datetime.now()
+fuso_horario = timezone('America/Sao_Paulo')
+data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+i=1
+while i <= 2: #countinous looping
+    driver.refresh()
+    elementName = driver.find_elements_by_xpath('//*[@id="react-root"]/section/main/section/div/div[1]/div/article[1]/div[2]/div[1]/ul/li/div/div/div/span/span');
+    for item in elementName:
+        ultimo = item.text
+
+    meusPosts.append(ultimo)
+
+    data_e_hora_atuais = datetime.now()
+    fuso_horario = timezone('America/Sao_Paulo')
+    data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+    data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%H:%M:%S,%f')[:-3]
+    horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+    if meusPosts[-1]==meusPosts[-2]:
+        meusPosts.pop(-1)
+        horaPost.pop(-1)
+    else:
+        df_data = {'Descrição do Post': meusPosts, 'Hora Post': horaPost}
+    
+    df=pd.DataFrame (df_data)
+    writer = pd.ExcelWriter('Receb_Instagram_Generica_seed10.xlsx', engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Seed 10')
+
+    writer.save()
+
+
+##Sending posts as a User A from Twitter Platform 
+import time
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+import pyautogui
+
+driver = webdriver.Chrome()
+driver.get ('https://twitter.com/login')
+driver.set_window_size(700, 830)
+driver.set_window_position(750, 10)
+
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="page-container"]/div/div[1]/form/div[2]/button')))
+
+if element.is_displayed()== True:
+    print ('Página está disponível para efetuar login')
+
+else:
+    print('Página do Instagram não pode ser aberta')
+	
+#login
+pyautogui.moveTo(816, 300, duration=0.25)
+pyautogui.click(816, 300);
+pyautogui.typewrite('@axxxxx'); #username
+pyautogui.moveTo(820, 353, duration=0.25)
+pyautogui.click(820, 353);
+pyautogui.typewrite('xxxxxxx'); #password
+pyautogui.press('enter');
+
+random.seed(10)
+postsEnviados = []
+horaEnviados = []
+
+for i in range(50): #number of tweets by replication
+    #clicar na caixa de texto
+    pyautogui.moveTo(881, 300, duration=0.25)
+    pyautogui.click(881, 300);
+
+    pyautogui.typewrite('video 10 seg seed10 - ID: '+str(i));
+    postsEnviados.append(i)
+   
+    #to choose file 
+    pyautogui.moveTo(890, 389, duration=0.25)
+    pyautogui.click(890, 389);
+    pyautogui.moveTo(613, 258, duration=0.25)
+    pyautogui.click(613, 258);
+    
+    
+    pyautogui.moveTo(871, 196, duration=0.25)
+    pyautogui.click(871, 196)
+    pyautogui.moveTo(1301,549, duration=0.25)
+    pyautogui.click(1301,549);
+    pyautogui.moveTo(1330,593, duration=0.25)
+    pyautogui.click(1330,593);
+
+    #wait page load
+    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, '/html/body')))
+            
+    #wait page load
+    #element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, '//*[@id="global-new-tweet-button"]')))
+
+    hora_atuais = datetime.now()
+    fuso_horario = timezone('America/Sao_Paulo')
+    hora_sp = hora_atuais.astimezone(fuso_horario)
+    #data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+    data_e_hora_sao_paulo_em_texto = hora_sp.strftime('%H:%M:%S,%f')[:-3]
+    horaEnviados.append(data_e_hora_sao_paulo_em_texto)
+
+    df_data = {'Descricao do Post': postsEnviados, 'Hora Post': horaEnviados}
+    df=pd.DataFrame (df_data)
+    writer = pd.ExcelWriter('Envio_Twitter_Video_seed10.xlsx', engine='xlsxwriter')
+
+    df.to_excel(writer, sheet_name='seed10')
+
+    writer.save()
+    intervalo =random.expovariate(0.34)
+    sleep(intervalo) 
+
+##Capturing posts at User B Twitter timeline 
+
+#open Twitter page
+driver = webdriver.Chrome()
+driver.get ('https://twitter.com/login')
+driver.set_window_size(700, 830)
+driver.set_window_position(750, 10)
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="page-container"]/div/div[1]/form/div[2]/button')))
+
+if element.is_displayed()== True:
+    print ('Página está disponível para efetuar login')
+
+else:
+    print('Página do Twitter não pode ser aberta')
+
+  
+pyautogui.moveTo(816, 300, duration=0.25);
+pyautogui.click(816,300);
+
+pyautogui.typewrite('@xxxxxx'); #username
+pyautogui.moveTo(820, 353, duration=0.25);
+pyautogui.click(820, 353);
+pyautogui.typewrite('xxxxx'); #password
+pyautogui.press('enter');
+
+
+#wait page load
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="global-new-tweet-button"]/span')))
+
+meusPosts=[]
+horaPost=[]
+
+elementName = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[4]/div[2]/ol/li[1]/div/div/div[2]/p'); #last post
+elementName1 = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[4]/div[2]/ol/li[2]/div/div/div[2]/p'); #last but one post
+
+for item in elementName:
+    ultimo = item.text
+meusPosts.append(ultimo)
+
+data_e_hora_atuais = datetime.now()
+fuso_horario = timezone('America/Sao_Paulo')
+data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+for e in elementName1:
+    pultimo = e.text
+meusPosts.append(pultimo)
+
+data_e_hora_atuais = datetime.now()
+fuso_horario = timezone('America/Sao_Paulo')
+data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M:%S,%f')[:-3]
+horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+i=1
+while i <= 2: #continuous looping
+    driver.refresh()
+    elementName = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[4]/div[2]/ol/li[1]/div/div/div[2]/p');
+    for item in elementName:
+        ultimo = item.text
+
+    meusPosts.append(ultimo)
+
+    data_e_hora_atuais = datetime.now()
+    fuso_horario = timezone('America/Sao_Paulo')
+    data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+    data_e_hora_sao_paulo_em_texto = data_e_hora_sao_paulo.strftime('%H:%M:%S,%f')[:-3]
+    horaPost.append (data_e_hora_sao_paulo_em_texto)
+
+    if meusPosts[-1]==meusPosts[-2]:
+        meusPosts.pop(-1)
+        horaPost.pop(-1)
+    else:
+        df_data = {'Descrição do Post': meusPosts, 'Hora Post': horaPost}
+    
+    df=pd.DataFrame (df_data)
+    
+    writer = pd.ExcelWriter('Recebimento_Twitter_Video_seed10.xlsx', engine='xlsxwriter')
+
+    df.to_excel(writer, sheet_name='seed10')
+
+    writer.save()
+
+
