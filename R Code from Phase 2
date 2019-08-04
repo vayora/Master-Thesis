@@ -1,0 +1,51 @@
+##Sending tweets automatically 
+library(stringr)
+library(twitteR)
+
+#Set up twitter Stream Api 
+setup_twitter_oauth(consumer_key <- "xxxxxxxxxxxxx", # From dev.twitter.com
+                    consumer_secret <-"xxxxxxxxxxxx",# From dev.twitter.com
+                    access_token = "xxxxxxxxxxxxxxx",# From dev.twitter.com
+                    access_secret = "xxxxxxxxxxxxxx")# From dev.twitter.com
+lambda<-0.34
+tweetsEnviados <- list()
+for(i in 1:5){
+ time <- Sys.time()  
+ tweet_text <- paste0("#aksurevlorrainearoya ","exp.1 ","tweet ",i," hora ", time)
+ tweet(tweet_text)
+ tweetsEnviados[[i]] <-Sys.time()
+ geraIntervalo<-rexp (1, lambda)
+ Sys.sleep(geraIntervalo) 
+}
+write.csv(tweetsEnviados, 'envioTweets.csv', row.names=F)
+
+##Capturing tweets by Streaming API
+#establish credentials
+requestURL <- "https://api.twitter.com/oauth/request_token";
+accessURL <- "https://api.twitter.com/oauth/access_token";
+authURL <- "https://api.twitter.com/oauth/authorize";
+consumer_key <- "xxxxxx"; # From em dev.twitter.com
+consumer_secret <- "xxxxx"; # From dev.twitter.com
+
+my_oauth_twitter <- OAuthFactory$new(consumerKey = consumer_key,
+                                     consumerSecret = consumer_secret,
+                                     requestURL = requestURL,
+                                     accessURL = accessURL,
+                                     authURL = authURL);
+save(my_oauth_twitter, file = "my_oauth_twitter.Rdata")
+#opens a connection to Twitter's Streaming API that will return public statuses that match one or more filter predicates. 
+library(streamR)
+library(stringr)
+library (twitteR)
+library(ROAuth)
+rm(list = ls());
+load("my_oauth_twitter.Rdata")
+day<-format(as.Date(Sys.Date(),format="%Y-%m-%d"),"%d");
+hour=format(Sys.time(), "%H")
+min=format(Sys.time(), "%M")
+sec=format(Sys.time(), "%S")
+filterStream(file.name=paste0("tweets_",day,"_",hour,"_",min,"_",sec,".csv"),track="#aksurevlorrainearoya", oauth=my_oauth_twitter )
+#Run every 60 minutes, starting from 19:00
+library(taskscheduleR);
+myscript <-system.file("extdata","ScriptCapturaTweets.R",package="taskscheduleR");
+taskscheduler_create(taskname = "capturando", rscript = "ScriptCapturaTweets.R", schedule = "MINUTE",starttime = "19:00", modifier = 60, startdate = "30/07/2017")
